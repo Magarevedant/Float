@@ -1,0 +1,25 @@
+{
+  "name": "Float",
+  "short_name": "Float",
+  "description": "Your device. Reimagined.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#05050f",
+  "theme_color": "#05050f",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%2305050f'/%3E%3Crect x='48' y='42' width='96' height='16' rx='8' fill='url(%23g)'/%3E%3Crect x='48' y='72' width='64' height='16' rx='8' fill='url(%23g)' opacity='.85'/%3E%3Crect x='48' y='102' width='16' height='48' rx='8' fill='url(%23g)' opacity='.7'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='48' y1='42' x2='144' y2='150'%3E%3Cstop stop-color='%237dd3fc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%2305050f'/%3E%3Crect x='128' y='110' width='256' height='42' rx='21' fill='url(%23g)'/%3E%3Crect x='128' y='192' width='170' height='42' rx='21' fill='url(%23g)' opacity='.85'/%3E%3Crect x='128' y='274' width='42' height='128' rx='21' fill='url(%23g)' opacity='.7'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='128' y1='110' x2='384' y2='402'%3E%3Cstop stop-color='%237dd3fc'/%3E%3Cstop offset='1' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"]
+}
