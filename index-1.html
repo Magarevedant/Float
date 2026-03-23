@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#05050f"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>Float</title>
+<link rel="manifest" href="/manifest.json"/>
+<link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body>
+
+<!-- Wallpaper -->
+<div id="wallpaper"></div>
+
+<!-- ══ BOOT ══ -->
+<div id="boot-screen">
+  <div class="boot-rings">
+    <div class="boot-ring"></div>
+    <div class="boot-ring"></div>
+    <div class="boot-ring"></div>
+    <div class="boot-logo">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8"  y="7"  width="20" height="4" rx="2" fill="url(#lg)"/>
+        <rect x="8"  y="15" width="13" height="4" rx="2" fill="url(#lg)" opacity=".85"/>
+        <rect x="8"  y="23" width="4"  height="9" rx="2" fill="url(#lg)" opacity=".7"/>
+        <defs>
+          <linearGradient id="lg" x1="8" y1="7" x2="28" y2="32" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7dd3fc"/>
+            <stop offset="1" stop-color="#c084fc"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+  <div class="boot-word">Float</div>
+  <div class="boot-tag">your device. reimagined.</div>
+  <div class="boot-progress">
+    <div class="boot-track"><div class="boot-fill" id="boot-fill"></div></div>
+    <div class="boot-status" id="boot-status">initializing...</div>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-avatar">👤</div>
+    <div class="login-name">Float</div>
+    <div class="login-sub">enter credentials</div>
+    <div class="login-field">
+      <input type="text" id="login-user" placeholder="Username"
+             autocomplete="off" autocapitalize="off" spellcheck="false"/>
+    </div>
+    <div class="login-field">
+      <input type="password" id="login-pass" placeholder="Password"/>
+    </div>
+    <button class="login-btn" id="login-btn">Unlock Float</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ══ DESKTOP ══ -->
+<div id="desktop">
+
+  <div id="desktop-clock">
+    <div class="dc-time" id="dc-time"></div>
+    <div class="dc-date" id="dc-date"></div>
+  </div>
+
+  <!-- Desktop context menu -->
+  <div id="ctx-menu">
+    <div class="ctx-item" id="ctx-wallpaper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Change Wallpaper
+    </div>
+    <div class="ctx-item" id="ctx-settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+      System Settings
+    </div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-item" id="ctx-terminal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      Terminal
+    </div>
+    <div class="ctx-item" id="ctx-files">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+      Files
+    </div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-item" id="ctx-lock">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+      Lock
+    </div>
+  </div>
+
+  <!-- App Layer -->
+  <div id="app-layer">
+
+    <!-- TERMINAL -->
+    <div class="app-win active" id="app-terminal">
+      <div class="tbar">
+        <div class="tbar-dots">
+          <div class="tdot tdot-r" id="term-close"></div>
+          <div class="tdot tdot-y"></div>
+          <div class="tdot tdot-g" id="term-clear"></div>
+        </div>
+        <span class="tbar-title">Terminal</span>
+      </div>
+      <div id="term-body"></div>
+      <div id="term-input-row">
+        <span class="ti-prompt">~</span>
+        <span class="ti-path">$</span>
+        <input id="cmd-input" type="text" autocomplete="off"
+               autocorrect="off" autocapitalize="off" spellcheck="false"
+               placeholder="enter command..."/>
+      </div>
+    </div>
+
+    <!-- FILES -->
+    <div class="app-win" id="app-files">
+      <div class="tbar">
+        <div class="tbar-dots">
+          <div class="tdot tdot-r" id="files-close"></div>
+          <div class="tdot tdot-y"></div>
+          <div class="tdot tdot-g" id="files-refresh"></div>
+        </div>
+        <span class="tbar-title">Files</span>
+        <div class="tbar-actions">
+          <button class="tbar-btn" id="upload-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload
+          </button>
+        </div>
+      </div>
+      <div class="files-pathbar" id="files-pathbar"></div>
+      <div id="files-body" style="position:relative">
+        <div id="drop-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Drop files to upload
+        </div>
+        <div class="files-empty" id="files-loading">Loading...</div>
+        <div class="file-grid" id="file-grid" style="display:none"></div>
+      </div>
+      <input type="file" id="file-input" multiple style="display:none"/>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="app-win" id="app-settings">
+      <div class="tbar">
+        <div class="tbar-dots">
+          <div class="tdot tdot-r" id="settings-close"></div>
+          <div class="tdot tdot-y"></div>
+          <div class="tdot tdot-g" id="settings-refresh"></div>
+        </div>
+        <span class="tbar-title">System</span>
+      </div>
+      <div id="settings-body">
+
+        <div class="s-section">
+          <div class="s-section-title">Hardware</div>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="sc-label">Battery</div><div class="sc-val c-green"  id="s-bat">—</div></div>
+            <div class="stat-card"><div class="sc-label">Charging</div><div class="sc-val c-accent" id="s-bstat">—</div></div>
+            <div class="stat-card"><div class="sc-label">RAM Used</div><div class="sc-val c-accent2" id="s-mem">—</div></div>
+            <div class="stat-card"><div class="sc-label">Storage Free</div><div class="sc-val c-yellow" id="s-stor">—</div></div>
+          </div>
+        </div>
+
+        <div class="s-section">
+          <div class="s-section-title">Network</div>
+          <div class="stat-grid">
+            <div class="stat-card" style="grid-column:span 2"><div class="sc-label">IP Address</div><div class="sc-val c-accent" id="s-ip">—</div></div>
+            <div class="stat-card"><div class="sc-label">SSID</div><div class="sc-val" id="s-ssid">—</div></div>
+            <div class="stat-card"><div class="sc-label">Speed</div><div class="sc-val c-green" id="s-speed">—</div></div>
+          </div>
+        </div>
+
+        <div class="s-section">
+          <div class="s-section-title">Device</div>
+          <div class="s-row"><span class="s-key">Platform</span><span class="s-val">Android / Termux</span></div>
+          <div class="s-row"><span class="s-key">Runtime</span><span class="s-val">Node.js v25.8.1</span></div>
+          <div class="s-row"><span class="s-key">Float</span><span class="s-val">v1.1.0</span></div>
+          <div class="s-row"><span class="s-key">Uptime</span><span class="s-val" id="s-uptime">—</span></div>
+        </div>
+
+        <div class="s-section">
+          <div class="s-section-title">Wallpaper</div>
+          <div class="wp-grid" id="wp-grid"></div>
+          <div class="wp-url-row">
+            <input class="wp-url-input" id="wp-url" placeholder="https://image-url.jpg"/>
+            <button class="wp-apply" id="wp-apply-btn">Apply</button>
+          </div>
+        </div>
+
+        <div class="s-section">
+          <div class="s-section-title">Session</div>
+          <button class="lock-btn" id="lock-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            Lock Float
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /app-layer -->
+
+  <!-- Dock -->
+  <div id="dock">
+    <div class="dock-btn dock-active" id="dock-terminal">
+      <span class="dock-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </span>
+      <span class="dock-label">Terminal</span>
+      <div class="dock-dot"></div>
+    </div>
+    <div class="dock-btn" id="dock-files">
+      <span class="dock-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+      </span>
+      <span class="dock-label">Files</span>
+      <div class="dock-dot"></div>
+    </div>
+    <div class="dock-btn" id="dock-settings">
+      <span class="dock-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </span>
+      <span class="dock-label">System</span>
+      <div class="dock-dot"></div>
+    </div>
+  </div>
+
+</div><!-- /desktop -->
+
+<!-- File Viewer -->
+<div id="file-viewer">
+  <div class="fv-card">
+    <div class="fv-header">
+      <span class="fv-title" id="fv-title">—</span>
+      <div class="fv-actions" id="fv-actions"></div>
+      <div class="fv-close" id="fv-close">✕</div>
+    </div>
+    <div class="fv-body" id="fv-body"></div>
+  </div>
+</div>
+
+<!-- File Context Menu -->
+<div id="file-ctx">
+  <div class="fctx-item" id="fctx-open">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    Open
+  </div>
+  <div class="fctx-item" id="fctx-download">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download
+  </div>
+  <div class="fctx-item" id="fctx-rename">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Rename
+  </div>
+  <div class="fctx-item" id="fctx-copypath">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+    Copy Path
+  </div>
+  <div class="ctx-sep"></div>
+  <div class="fctx-item danger" id="fctx-delete">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+    Delete
+  </div>
+</div>
+
+<!-- Rename Modal -->
+<div id="rename-modal">
+  <div class="rename-card">
+    <h4>Rename</h4>
+    <input class="rename-input" id="rename-input" type="text" autocomplete="off" spellcheck="false"/>
+    <div class="rename-btns">
+      <button class="btn-cancel" id="rename-cancel">Cancel</button>
+      <button class="btn-confirm" id="rename-confirm">Rename</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-wrap"></div>
+
+<!-- Scripts -->
+<script src="/js/app.js"></script>
+<script src="/js/boot.js"></script>
+<script src="/js/login.js"></script>
+<script src="/js/terminal.js"></script>
+<script src="/js/files.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>
